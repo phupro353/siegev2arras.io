@@ -2,26 +2,27 @@
 
 ## Quick Start Guide
 
-1. Click the top right where it says **Remix to Edit :microphone:**
+1. Click the top right where it says **Remix**
 2. Give your new project a name.
-3. Your private server name will be at <http://arras.io/#host=arras-template.glitch.me> (replace `arras-template` with it's new name)
-4. You add a gamemode code in the link to specify its gamemode (see below).
+3. Your private server name will be at <https://arras.io/#host=arras-template.glitch.me> (replace `arras-template` with it's new name)
+4. You can add a gamemode code in the link to specify its gamemode (see below).
 
 ## More Information
 
-1. Open the file at the left named `🔑 .env`
+1. Open the file at the left named `.env 🔑`
 2. Fill it in with
 ```
 SECRET=aSecretPasswordHere
 ```
-3. Open the private server with <http://arras.io/#host=arras-template.glitch.me&key=aSecretPasswordHere> (replace `aSecretPasswordHere` with the password)
+3. Open the private server with <https://arras.io/#host=arras-template.glitch.me&key=aSecretPasswordHere> (replace `aSecretPasswordHere` with the password)
 4. The map/config data are in the `config.js` file
 5. The tank data are in the `lib/definitions.js` file
 6. Other stuff (score curve, stat amount) are in the `server.js` file
+7. To make custom shapes, you can go to <https://arras.io/ext/custom-shape>
 
 ## Gamemode Code
 
-You can add a gamemode code in the link to specify its gamemode, such as <http://arras.io/#host=arras-template.glitch.me&mode=f> where `f` is the gamemode code.
+You can add a gamemode code in the link to specify its gamemode, such as <https://arras.io/#host=arras-template.glitch.me&mode=f> where `f` is the gamemode code.
 
 Parts of the gamemode code must appear in the order below, all of which are optional:
 - `p` for Private
