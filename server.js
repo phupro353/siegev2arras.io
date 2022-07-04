@@ -4621,7 +4621,13 @@ var maintainloop = (() => {
                         choice = [[Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 2, 'a', 'spwn'];
                         break;
                     case 2: 
-                        choice = [[Class.palisade], 1, 'castle', 'spwn'];
+                        choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer], 1, 'castle', 'spwn'];
+                        break;
+                    case 3: 
+                        choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 3, 'a', 'spwn'];
+                        break;
+                    case 4: 
+                        choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 5, 'a', 'spwn'];
                         break;
                 }
                 boss.prepareToSpawn(...choice);
