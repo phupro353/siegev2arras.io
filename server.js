@@ -2468,8 +2468,8 @@ class Entity {
         // Remove from the collision grid
         this.removeFromGrid();
         this.isGhost = true;
-    }    
-    
+      if (this.ondeath)  this.ondeath();  
+    }
     isDead() {
         return this.health.amount <= 0; 
     }
@@ -3598,7 +3598,7 @@ const sockets = (() => {
                 // This is the public information we need for broadcasting
                 let readlb
                 // Define fundamental functions
-                /*const getminimap = (() => {
+                const getminimap = (() => {
                   let all = {
                     walls: [],
                     players: {},
@@ -3619,6 +3619,18 @@ const sockets = (() => {
                   }
                   setTimeout(updateMaze, 2500)
                   setInterval(updateMaze, 10000)
+                  if (room.spwn)
+                    for (let loc of room.spwn) {
+                      let o = new Entity(loc)
+                      o.define(Class.genericTank);
+                      o.ondeath = () => {
+                        let e = new Entity(loc)
+                        e.define(ran.choose([Class.palisade, Class.elite_destroyer, Class.elite_gunner, Class.elite_sprayer, Class.penta_destroyer]))
+                        e.team = -100
+                        e.ondeath = o.ondeath
+                        o = e
+                      }
+                    }
                   setInterval(() => {
                     let minimaps = all.players = { [1]: [], [2]: [], [3]: [], [4]: [] }
                     let minibosses = all.minibosses = []
@@ -3805,7 +3817,7 @@ const sockets = (() => {
                         // Return the reader
                         return full => full ? lb.full : lb.updates
                     }
-                })()*/
+                })()
                 // Util
                 let getBarColor = entry => {
                   switch (entry.team) {
