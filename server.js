@@ -73,7 +73,8 @@ const room = {
     room.findType('bas4');
     room.findType('roid');
     room.findType('rock');
-    room.findType('spwn')
+    room.findType('spwn');
+    room.findType('sanc')
     room.nestFoodAmount = 1.5 * Math.sqrt(room.nest.length) / room.xgrid / room.ygrid;
     room.random = () => {
         return {
@@ -3375,8 +3376,8 @@ const sockets = (() => {
                     // Decide how to color and team the body
                     switch (room.gameMode) {
                         case "tdm": {
-                            body.team = -player.team;
-                            body.color = [10, 11, 12, 15][player.team - 1];
+                            body.team = -1;
+                            body.color = 10;
                         } break;
                         default: {
                             body.color = (c.RANDOM_COLORS) ? 
@@ -3670,7 +3671,24 @@ const sockets = (() => {
                       let o = new Entity(loc)
                       o.define(Class.sanctuary)
                       o.team = -1
-                      o.
+                      o.color = 10
+                      o.SIZE = 50
+                      o.ondeath = () => {
+                        let e = new Entity(loc)
+                        e.define(Class.sanctuary)
+                        e.team = -100
+                        e.color = 13
+                        e.SIZE = 50
+                        e.ondeath = () => {
+                           let d = new Entity(loc)
+                           d.define(Class.sanctuary)
+                           d.team = -1
+                           d.color = 10
+                           d.SIZE = 50
+                           d.ondeath = o.ondeath
+                           o = d
+                        }
+                      }
                     }
                   setInterval(() => {
                     let minimaps = all.players = { [1]: [], [2]: [], [3]: [], [4]: [] }

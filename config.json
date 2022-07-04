@@ -17,10 +17,10 @@
   "RANDOM_COLORS": false,
   "BANNED_CHARACTER_REGEX": "/[\uFDFD\u200E\u0000]/gi", 
   "ROOM_SETUP": [
-    [ "norm", "norm", "spwn", "norm" ],
+    [ "sanc", "norm", "spwn", "sanc" ],
     [ "norm", "nest", "nest", "norm" ],
     [ "norm", "nest", "nest", "norm" ],
-    [ "norm", "spwn", "norm", "norm" ]
+    [ "sanc", "spwn", "norm", "sanc" ]
   ],
   "X_GRID": 4,
   "Y_GRID": 4,
