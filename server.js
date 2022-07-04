@@ -4671,6 +4671,10 @@ var maintainloop = (() => {
                     case 4: 
                         choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 5, 'a', 'spwn'];
                         break;
+                    case 5: 
+                        choice = [[Class.plasma], 5, 'a', 'spwn'];
+                        sockets.broadcast("Real Trouble comes now... The Celestials rise and Attack the earth. and one got to the siege and will start to dominate!")
+                        break;
                 } 
                 boss.prepareToSpawn(...choice);
                 setTimeout(boss.spawn, 3000);
