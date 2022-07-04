@@ -3619,18 +3619,18 @@ const sockets = (() => {
                   }
                   setTimeout(updateMaze, 2500)
                   setInterval(updateMaze, 10000)
-                  if (room.spwn)
-                    for (let loc of room.spwn) {
-                      let o = new Entity(loc)
-                      o.define(Class.genericTank);
-                      o.ondeath = () => {
-                        let e = new Entity(loc)
-                        e.define(ran.choose([Class.palisade, Class.elite_destroyer, Class.elite_gunner, Class.elite_sprayer, Class.penta_destroyer]))
-                        e.team = -100
-                        e.ondeath = o.ondeath
-                        o = e
-                      }
-                    }
+                  // if (room.spwn)
+                  //   for (let loc of room.spwn) {
+                  //     let o = new Entity(loc)
+                  //     o.define(Class.genericTank);
+                  //     o.ondeath = () => {
+                  //       let e = new Entity(loc)
+                  //       e.define(ran.choose([Class.palisade, Class.elite_destroyer, Class.elite_gunner, Class.elite_sprayer, Class.penta_destroyer]))
+                  //       e.team = -100
+                  //       e.ondeath = o.ondeath
+                  //       o = e
+                  //     }
+                  //   }
                   setInterval(() => {
                     let minimaps = all.players = { [1]: [], [2]: [], [3]: [], [4]: [] }
                     let minibosses = all.minibosses = []
@@ -4541,66 +4541,87 @@ var maintainloop = (() => {
     }
     placeRoids();
     // Spawning functions
-    let spawnBosses = (() => {
-        let timer = 0;
-        let boss = (() => {
-            let i = 0,
-                names = [],
-                bois = [Class.egg],
-                n = 0,
-                begin = 'yo some shit is about to move to a lower position',
-                arrival = 'Something happened lol u should probably let Neph know this broke',
-                loc = 'norm';
-            let spawn = () => {
-                let spot, m = 0;
-                do {
-                    spot = room.randomType(loc); m++;
-                } while (dirtyCheck(spot, 500) && m<30);
-                let o = new Entity(spot);
-                    o.define(ran.choose(bois));
-                    o.team = -100;
-                    o.name = names[i++];
-            };
-            return {
-                prepareToSpawn: (classArray, number, nameClass, typeOfLocation = 'norm') => {
-                    n = number;
-                    bois = classArray;
-                    loc = typeOfLocation;
-                    names = ran.chooseBossName(nameClass, number);
-                    i = 0;
-                    if (n === 1) {
-                        begin = 'A visitor is coming.';
-                        arrival = names[0] + ' has arrived.'; 
-                    } else {
-                        begin = 'Visitors are coming.';
-                        arrival = '';
-                        for (let i=0; i<n-2; i++) arrival += names[i] + ', ';
-                        arrival += names[n-2] + ' and ' + names[n-1] + ' have arrived.';
-                    }
-                },
-                spawn: () => {
-                    sockets.broadcast(begin);
-                    for (let i=0; i<n; i++) {
-                        setTimeout(spawn, ran.randomRange(3500, 5000));
-                    }
-                    // Wrap things up.
-                    setTimeout(() => sockets.broadcast(arrival), 5000);
-                    util.log('[SPAWN] ' + arrival);
-                },
-            };
-        })();
-        return census => {
-            if (timer > 6000 && ran.dice(16000 - timer)) {
-                util.log('[SPAWN] Preparing to spawn...');
-                timer = 0;
-                let choice = [];
-                switch (ran.chooseChance(40, 1)) {
-                    case 0: 
-                        choice = [[Class.elite_destroyer], 2, 'a', 'nest'];
-                        break;
+   let spawnBosses = (() => {
+    let timer = 8;
+    let wave = 1;
+    let boss = (() => {
+      let i = 0,
+        names = [],
+        bois = [Class.egg],
+        n = 0,
+        begin = "yo some sh&t is about to move to a lower position",
+        arrival =
+          "Something happened lol u should probably let Neph know this broke",
+        loc = "norm";
+      let spawn = () => {
+        let spot,
+          m = 0;
+        do {
+          spot = room.randomType(loc);
+          m++;
+        } while (dirtyCheck(spot, 500) && m < 30);
+        let o = new Entity(spot);
+        o.define(ran.choose(bois));
+        o.team = -100;
+        o.name = names[i++];
+      };
+      return {
+        prepareToSpawn: (
+          classArray,
+          number,
+          nameClass,
+          typeOfLocation = "nest"
+        ) => {
+          n = number;
+          bois = classArray;
+          loc = typeOfLocation;
+          names = ran.chooseBossName(nameClass, number);
+          i = 0;
+          if (n === 0) {
+            begin = "A visitor is coming.";
+            arrival = names[0] + " has arrived.";
+          } else {
+            begin = "The Wave has started!";
+            arrival = "";
+            arrival += "Wave " + wave + " has Started.";
+          }
+          wave += 1;
+        },
+        spawn: () => {
+          sockets.broadcast(begin);
+          for (let i = 0; i < n; i++) {
+            setTimeout(spawn, ran.randomRange(10, 10));
+          }
+          // Wrap things up.
+          setTimeout(() => sockets.broadcast(arrival), 10);
+          util.log("[SPAWN] " + arrival);
+        }
+      };
+    })();
+    let spawnBoss1 = census => {
+      let spot,
+        i = 30;
+      do {
+        spot = room.randomType("nest");
+        i--;
+        if (!i) return 0;
+      } while (dirtyCheck(spot, 100));
+      let type = Class.elite_gunner;
+      let o = new Entity(spot);
+      o.define(type);
+      o.color = -100;
+    };
+    return census => {
+      if (timer > 20 && ran.dice(35 - timer)) {
+        util.log("[SPAWN] Preparing to spawn...");
+        timer = 0;
+        let choice = [];
+        switch (wave) {
                     case 1: 
-                        choice = [[Class.palisade], 1, 'castle', 'norm']; 
-                        sockets.broadcast('A strange trembling...');
+                        choice = [[Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 2, 'a', 'spwn'];
+                        break;
+                    case 2: 
+                        choice = [[Class.palisade], 1, 'castle', 'spwn'];
                         break;
                 }
                 boss.prepareToSpawn(...choice);
