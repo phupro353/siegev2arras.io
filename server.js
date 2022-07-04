@@ -743,6 +743,27 @@ class io_spin extends IO {
         };        
     }
 }
+class io_slowspin extends IO {
+    constructor(b) {
+        super(b);
+        this.a = 0;
+    }
+    
+    think(input) {
+        this.a += 0.025;
+        let offset = 0;
+        if (this.body.bond != null) {
+            offset = this.body.bound.angle;
+        }
+        return {                
+            target: {
+                x: Math.cos(this.a + offset),
+                y: Math.sin(this.a + offset),
+            },  
+            main: true,
+        };        
+    }
+}
 class io_fastspin extends IO {
     constructor(b) {
         super(b);
@@ -772,6 +793,27 @@ class io_reversespin extends IO {
     
     think(input) {
         this.a -= 0.05;
+        let offset = 0;
+        if (this.body.bond != null) {
+            offset = this.body.bound.angle;
+        }
+        return {                
+            target: {
+                x: Math.cos(this.a + offset),
+                y: Math.sin(this.a + offset),
+            },  
+            main: true,
+        };        
+    }
+}
+class io_reverseslowspin extends IO {
+    constructor(b) {
+        super(b);
+        this.a = 0;
+    }
+    
+    think(input) {
+        this.a -= 0.025;
         let offset = 0;
         if (this.body.bond != null) {
             offset = this.body.bound.angle;
@@ -4629,7 +4671,7 @@ var maintainloop = (() => {
                     case 4: 
                         choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 5, 'a', 'spwn'];
                         break;
-                }
+                } 
                 boss.prepareToSpawn(...choice);
                 setTimeout(boss.spawn, 3000);
                 // Set the timeout for the spawn functions
