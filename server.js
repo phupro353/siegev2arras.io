@@ -750,7 +750,7 @@ class io_slowspin extends IO {
     }
     
     think(input) {
-        this.a += 0.025;
+        this.a += 0.02;
         let offset = 0;
         if (this.body.bond != null) {
             offset = this.body.bound.angle;
@@ -813,7 +813,7 @@ class io_reverseslowspin extends IO {
     }
     
     think(input) {
-        this.a -= 0.025;
+        this.a -= 0.02;
         let offset = 0;
         if (this.body.bond != null) {
             offset = this.body.bound.angle;
@@ -4954,7 +4954,7 @@ var maintainloop = (() => {
     return () => {
         // Do stuff
         makenpcs();      
-        makefood(); 
+        //makefood(); 
         // Regen health and update the grid
         entities.forEach(instance => {
             if (instance.shield.max) {
