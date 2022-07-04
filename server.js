@@ -4675,6 +4675,10 @@ var maintainloop = (() => {
                         choice = [[Class.plasma], 1, 'a', 'spwn'];
                         sockets.broadcast("Real Trouble comes now... The Celestials rise and Attack the earth. and one got to the siege and will start to dominate!")
                         break;
+                    case 6:
+                        setTimeout(() => {
+                          process.exit()
+                        }, 10000) 
                 } 
                 boss.prepareToSpawn(...choice);
                 setTimeout(boss.spawn, 3000);
