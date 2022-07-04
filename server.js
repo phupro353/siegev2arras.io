@@ -2162,6 +2162,10 @@ class Entity {
             this.maxSpeed = this.topSpeed;
             this.damp = 0.05;
             break;
+        case "healBullet":
+            this.isHealBullet = true;
+            this.maxSpeed = this.topSpeed;
+            break;
         case 'motor':
             this.maxSpeed = 0;            
             if (this.topSpeed) {
@@ -4464,18 +4468,31 @@ var gameloop = (() => {
                 if (instance.type === 'wall') advancedcollide(instance, other, false, false, a);
                 else advancedcollide(other, instance, false, false, a);
             } else
-            // If they can firm collide, do that
-            if ((instance.type === 'crasher' && other.type === 'food') || (other.type === 'crasher' && instance.type === 'food')) {
-                firmcollide(instance, other);
-            } else
-            // Otherwise, collide normally if they're from different teams
-            if (instance.team !== other.team) {
+             // If they can firm collide, do that
+       if (
+        (instance.type === "crasher" && other.type === "food") ||
+        (other.type === "crasher" && instance.type === "food")
+      ) {
+        firmcollide(instance, other);
+      }
+      // Otherwise, collide normally if they're from different teams
+      else if (instance.team !== other.team) {
+        if (!instance.isHealBullet && !other.isHealBullet)
+          advancedcollide(instance, other, true, true);
+      } else if (
+        (instance.isHealBullet && other.team === instance.team) ||
+        (other.isHealBullet && instance.team === other.team)
+      ) {
+        if (instance.master != other && other.master != instance)
+          advancedcollide(instance, other, true, true);
+      }
+            else if (instance.team !== other.team) {
                 advancedcollide(instance, other, true, true);
             } else 
             // Ignore them if either has asked to be
             if (instance.settings.hitsOwnType == 'never' || other.settings.hitsOwnType == 'never') {
                 // Do jack                    
-            } else 
+            } else  
             // Standard collision resolution
             if (instance.settings.hitsOwnType === other.settings.hitsOwnType) {
                 switch (instance.settings.hitsOwnType) {
