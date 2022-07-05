@@ -4702,10 +4702,16 @@ var maintainloop = (() => {
                         choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 5, 'a', 'spwn'];
                         break;
                     case 5: 
-                        choice = [[Class.plasma], 1, 'a', 'spwn'];
+                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer], 2, 'a', 'spwn'];
                         sockets.broadcast("Real Trouble comes now... The Celestials rise and Attack the earth. and one got to the siege and will start to dominate!")
                         break;
-                    case 6:
+                    case 7: 
+                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer], 3, 'a', 'spwn'];
+                        break;
+                    case 8: 
+                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 4, 'a', 'spwn'];
+                        break;
+                    case 9:
                         setTimeout(() => {
                           process.exit()
                         }, 10000) 
