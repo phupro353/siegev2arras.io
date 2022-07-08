@@ -18,8 +18,8 @@
   "BANNED_CHARACTER_REGEX": "/[\uFDFD\u200E\u0000]/gi", 
   "ROOM_SETUP": [
     [ "sanc", "nest", "nest", "sanc" ],
-    [ "nest", "spwn", "spwn", "nest" ],
-    [ "nest", "spwn", "spwn", "nest" ],
+    [ "nest", "norm", "spwn", "nest" ],
+    [ "nest", "spwn", "norm", "nest" ],
     [ "sanc", "nest", "nest", "sanc" ]
   ],
   "X_GRID": 4,
