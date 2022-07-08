@@ -17,10 +17,10 @@
   "RANDOM_COLORS": false,
   "BANNED_CHARACTER_REGEX": "/[\uFDFD\u200E\u0000]/gi", 
   "ROOM_SETUP": [
-    [ "sanc", "norm", "spwn", "sanc" ],
-    [ "norm", "nest", "nest", "norm" ],
-    [ "norm", "nest", "nest", "norm" ],
-    [ "sanc", "spwn", "norm", "sanc" ]
+    [ "sanc", "nest", "nest", "sanc" ],
+    [ "nest", "spwn", "spwn", "nest" ],
+    [ "nest", "spwn", "spwn", "nest" ],
+    [ "sanc", "nest", "nest", "sanc" ]
   ],
   "X_GRID": 4,
   "Y_GRID": 4,
@@ -55,8 +55,8 @@
   "SKILL_CHEAT_CAP": 45,
   "SKILL_LEAK": 0,
   "STEALTH": 4,
-  "MIN_SPEED": 0.001,
-  "FOOD_AMOUNT": 0.4, 
+  "MIN_SPEED": 0.000000000000000001,
+  "FOOD_AMOUNT": 0.0000000000000004, 
   "SKILL_BOOST": 5,
   "BOTS": 0,
   "GLASS_HEALTH_FACTOR": 2
