@@ -4784,9 +4784,9 @@ var maintainloop = (() => {
     })();
     let spawnCrasher = census => {
         if (ran.chance(1 -  0.5 * census.crasher / room.maxFood / room.nestFoodAmount)) {
-            let spot, i = 30;
-            do { spot = room.randomType('nest'); i--; if (!i) return 0; } while (dirtyCheck(spot, 100));
-            let type = (ran.dice(80)) ? ran.choose([Class.sentryGun, Class.sentrySwarm, Class.sentryTrap]) : Class.crasher;
+            let spot, i = 2;
+            do { spot = room.randomType('nest'); i--; if (!i) return 0; } while (dirtyCheck(spot, 2));
+            let type = ran.choose([Class.sentryGun, Class.sentrySwarm, Class.sentryTrap]);
             let o = new Entity(spot);
                 o.define(type);
                 o.team = -100;
@@ -4819,7 +4819,7 @@ var maintainloop = (() => {
                 }
             }).filter(e => { return e; });    
             // Spawning
-            spawnCrasher(census);
+            //spawnCrasher(census);
             spawnBosses(census);
             /*/ Bots
                 if (bots.length < c.BOTS) {
