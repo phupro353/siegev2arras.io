@@ -4748,10 +4748,11 @@ var maintainloop = (() => {
                         choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 5, 'a', 'spwn'];
                         break;
                     case 5: 
-                        choice = [[Class.palisade, Class.elite_battleship, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer, exports.unknownboss], 6, 'a', 'spwn'];
+                        choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 6, 'a', 'spwn'];
                         break;
                     case 6: 
                         choice = [[Class.elite_battleship, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner], 4, 'a', 'spwn'];
+                        sockets.broadcast('Elite Crasher Series X')
                         break;
                     case 7: 
                         choice = [[Class.elite_battleship], 3, 'a', 'spwn'];
