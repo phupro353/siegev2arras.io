@@ -3720,7 +3720,7 @@ const sockets = (() => {
                       o.SIZE = 50
                       o.ondeath = () => {
                         let e = new Entity(loc)
-                        e.define(Class.sanctuary)
+                        e.define(Class.deadsanctuary)
                         e.team = -100
                         e.color = 13
                         e.SIZE = 50
