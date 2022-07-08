@@ -681,6 +681,51 @@ class io_minion extends IO {
         }
     }
 }
+class io_egunner extends IO {
+    constructor(body) {
+        super(body);
+        this.turnwise = 1;
+    }
+
+    think(input) {
+        if (this.body.aiSettings.reverseDirection && ran.chance(0.005)) { this.turnwise = -1 * this.turnwise; }
+        if (input.target != null && (input.alt || input.main)) {
+            let sizeFactor = Math.sqrt(this.body.master.size / this.body.master.SIZE);
+            let leash = 60 * sizeFactor;
+            let orbit = 120 * sizeFactor;
+            let repel = 135 * sizeFactor;
+            let goal;
+            let power = 1;
+            let target = new Vector(input.target.x, input.target.y);
+            if (input.alt) {
+                // Leash
+                if (target.length < leash) {
+                    goal = {
+                        x: this.body.x + target.x,
+                        y: this.body.y + target.y,
+                    };
+                // Spiral repel
+                } else if (target.length < repel) {
+                    let dir = -this.turnwise * target.direction + Math.PI / 5;
+                    goal = {
+                        x: this.body.x + Math.cos(dir),
+                        y: this.body.y + Math.sin(dir),
+                    };
+                // Free repel
+                } else {
+                    goal = {
+                        x: this.body.x - target.x,
+                        y: this.body.y - target.y,
+                    };
+                }
+            }
+            return { 
+                goal: goal,
+                power: power,
+            };
+        }
+    }
+}
 class io_hangOutNearMaster extends IO {
     constructor(body) {
         super(body);
