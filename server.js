@@ -4557,6 +4557,7 @@ var gameloop = (() => {
                 case 'push': advancedcollide(instance, other, false, false); break;
                 case 'hard': firmcollide(instance, other); break;
                 case 'hardWithBuffer': firmcollide(instance, other, 30); break;
+                case 'tank': firmcollide(instance, other, 1); break;
                 case 'repel': simplecollide(instance, other); break;
                 }
             }     
@@ -4769,7 +4770,7 @@ var maintainloop = (() => {
                         choice = [[Class.pluto], 1, 'a', 'spwn'];
                         break;
                     case 12: 
-                        choice = [[Class.plasma, Class.pluto, Class.palisade, Class.elite_batleship, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 5, 'a', 'spwn'];
+                        choice = [[Class.plasma, Class.pluto, Class.palisade, Class.elite_batleship, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner], 5, 'a', 'spwn'];
                         break;
                     case 13:
                         setTimeout(() => {
