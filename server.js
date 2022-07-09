@@ -2208,6 +2208,10 @@ class Entity {
             this.maxSpeed = this.topSpeed;
             this.damp = 0.05;
             break;
+        case 'shield':
+            this.x = this.master.x
+            this.y = this.master.y
+            break;
         case "healBullet":
             this.isHealBullet = true;
             this.maxSpeed = this.topSpeed;
