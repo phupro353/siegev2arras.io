@@ -73,9 +73,10 @@ const room = {
     room.findType('bas4');
     room.findType('roid');
     room.findType('rock');
-    room.findType('spwn');
+    room.findType('spwn'); //normal boss spawner
     room.findType('sanc');
-    room.findType('wall')
+    room.findType('wall');
+    room.findType('fspw'); //final boss spawner
     room.nestFoodAmount = 1.5 * Math.sqrt(room.nest.length) / room.xgrid / room.ygrid;
     room.random = () => {
         return {
@@ -3726,7 +3727,7 @@ const sockets = (() => {
                     for (let loc of room.wall) {
                       let o = new Entity(loc)
                       o.define(Class.mazewall)
-                      o.SIZE = 212
+                      o.SIZE = 211
                     }
                     var sec_left = 60; //How long before team loses
   var stopTime = 0;

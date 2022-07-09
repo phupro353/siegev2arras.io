@@ -18,11 +18,11 @@
   "BANNED_CHARACTER_REGEX": "/[\uFDFD\u200E\u0000]/gi", 
   "ROOM_SETUP": [
     [ "wall", "wall", "wall", "spwn", "wall", "wall", "wall"],
-    [ "wall", "norm", "norm", "norm", "norm", "norm", "wall"],
-    [ "wall", "norm", "sanc", "nest", "sanc", "norm", "wall"],
-    [ "spwn", "norm", "nest", "fspw", "nest", "norm", "spwn"],
-    [ "wall", "norm", "sanc", "nest", "sanc", "norm", "wall"],
-    [ "wall", "norm", "norm", "norm", "norm", "norm", "wall"],
+    [ "wall", "sanc", "nest", "nest", "nest", "sanc", "wall"],
+    [ "wall", "nest", "fspw", "fspw", "fspw", "nest", "wall"],
+    [ "spwn", "nest", "fspw", "fspw", "fspw", "nest", "spwn"],
+    [ "wall", "nest", "fspw", "fspw", "fspw", "nest", "wall"],
+    [ "wall", "sanc", "nest", "nest", "nest", "sanc", "wall"],
     [ "wall", "wall", "wall", "spwn", "wall", "wall", "wall"]
   ],
   "X_GRID": 7,
