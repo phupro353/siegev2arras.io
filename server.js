@@ -5034,15 +5034,14 @@ var maintainloop = (() => {
             // Spawning
             //spawnCrasher(census);
             spawnBosses(census);
-            /*/ Bots
+            // Bots
                 if (bots.length < c.BOTS) {
                     let o = new Entity(room.random());
-                    o.color = 17;
                     o.define(Class.bot);
                     o.define(Class.basic);
                     o.name += ran.chooseBotName();
                     o.refreshBodyAttributes();
-                    o.color = 17;
+                    o.team = -1
                     bots.push(o);
                 }
                 // Remove dead ones
@@ -5054,7 +5053,7 @@ var maintainloop = (() => {
                         o.skill.maintain();
                     }
                 });
-            */
+            
         };
     })();
     // The big food function
