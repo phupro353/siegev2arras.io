@@ -4550,8 +4550,8 @@ var gameloop = (() => {
       } else if (
         (instance.isHealBullet && other.team === instance.team) ||
         (other.isHealBullet && instance.team === other.team)
-      ) {//sex mark
-        if (instance.master != other && other.master != instance)
+      ) {
+        if (instance.type == "tank" && other.type != instance)
           advancedcollide(instance, other, true, true);
       }
             else if (instance.team !== other.team) {
