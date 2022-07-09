@@ -74,7 +74,8 @@ const room = {
     room.findType('roid');
     room.findType('rock');
     room.findType('spwn');
-    room.findType('sanc')
+    room.findType('sanc');
+    room.findType('wall')
     room.nestFoodAmount = 1.5 * Math.sqrt(room.nest.length) / room.xgrid / room.ygrid;
     room.random = () => {
         return {
@@ -3721,6 +3722,12 @@ const sockets = (() => {
                   }
                   setTimeout(updateMaze, 2500)
                   setInterval(updateMaze, 10000)
+                  if (room.wall)
+                    for (let loc of room.wall) {
+                      let o = new Entity(loc)
+                      o.define(Class.mazewall)
+                      o.SIZE = 142
+                    }
                   if (room.sanc)
                     for (let loc of room.sanc) {
                       let o = new Entity(loc)
@@ -4265,15 +4272,112 @@ var gameloop = (() => {
             }
         }
         function reflectcollide(wall, bounce) {
-            let delt = new Vector(wall.x - bounce.x, wall.y - bounce.y);
-            let dist = delt.length;
-            let diff = wall.size + bounce.size - dist;
-            if (diff > 0) {
-                bounce.accel.x -= diff * delt.x / dist;
-                bounce.accel.y -= diff * delt.y / dist;
-                return 1;
+          if (bounce.type === 'crasher' || bounce.passThroughWalls) return;
+          if (bounce.x + bounce.size < wall.x - wall.size
+           || bounce.x - bounce.size > wall.x + wall.size
+           || bounce.y + bounce.size < wall.y - wall.size
+           || bounce.y - bounce.size > wall.y + wall.size) return 0
+          if (wall.intangibility) return 0
+          let bounceBy = bounce.type === 'tank' ? 1.0 : bounce.type === ('miniboss', 'bobboss') ? 2.5 : 0.1
+
+          let pushVertical = wall.facing === Math.PI / 2
+          let pushHorizontal = wall.facing === Math.PI
+
+          // cases:   normal       sided
+          // top     C T T T C   C T T T C
+          // exposed L I T I R   T T T T T
+          //         L L X R R   X X X X X
+          // exposed L I B I R   B B B B B
+          // bottom  C B B B C   C B B B C
+          // C = corner with check
+          // I = corner inverse
+          // X = push toward nearest side
+
+          let left = bounce.x < wall.x - wall.size
+          let right = bounce.x > wall.x + wall.size
+          let top = bounce.y < wall.y - wall.size
+          let bottom = bounce.y > wall.y + wall.size
+
+          let leftExposed = bounce.x - bounce.size < wall.x - wall.size
+          let rightExposed = bounce.x + bounce.size > wall.x + wall.size
+          let topExposed = bounce.y - bounce.size < wall.y - wall.size
+          let bottomExposed = bounce.y + bounce.size > wall.y + wall.size
+
+          let intersected = true
+
+          if (left && right) {
+            left = right = false
+          }
+          if (top && bottom) {
+            top = bottom = false
+          }
+          if (leftExposed && rightExposed) {
+            leftExposed = rightExposed = false
+          }
+          if (topExposed && bottomExposed) {
+            topExposed = bottomExposed = false
+          }
+
+          if (pushVertical) {
+            left = leftExposed = false
+            right = rightExposed = false
+            top = topExposed = bounce.y < wall.y
+            bottom = bottomExposed = bounce.y > wall.y
+            bounceBy *= 0.2
+          } else if (pushHorizontal) {
+            top = topExposed = false
+            bottom = bottomExposed = false
+            left = leftExposed = bounce.x < wall.x
+            right = rightExposed = bounce.x > wall.x
+            bounceBy *= 0.2
+          }
+
+          if ((left && !top && !bottom) || (leftExposed && !topExposed && !bottomExposed)) {
+            bounce.accel.x -= (bounce.x + bounce.size - wall.x + wall.size) * bounceBy
+          } else if ((right && !top && !bottom) || (rightExposed && !topExposed && !bottomExposed)) {
+            bounce.accel.x -= (bounce.x - bounce.size - wall.x - wall.size) * bounceBy
+          } else if ((top && !left && !right) || (topExposed && !leftExposed && !rightExposed)) {
+            bounce.accel.y -= (bounce.y + bounce.size - wall.y + wall.size) * bounceBy
+          } else if ((bottom && !left && !right) || (bottomExposed && !leftExposed && !rightExposed)) {
+            bounce.accel.y -= (bounce.y - bounce.size - wall.y - wall.size) * bounceBy
+          } else {
+            let x = leftExposed ? -wall.size : rightExposed ? wall.size : 0
+            let y = topExposed ? -wall.size : bottomExposed ? wall.size : 0
+
+            let point = new Vector(wall.x + x - bounce.x, wall.y + y - bounce.y)
+
+            if (!x || !y) {
+              if (bounce.x + bounce.y < wall.x + wall.y) { // top left
+                if (bounce.x - bounce.y < wall.x - wall.y) { // bottom left
+                  bounce.accel.x -= (bounce.x + bounce.size - wall.x + wall.size) * bounceBy
+                } else { // top right
+                  bounce.accel.y -= (bounce.y + bounce.size - wall.y + wall.size) * bounceBy
+                }
+              } else { // bottom right
+                if (bounce.x - bounce.y < wall.x - wall.y) { // bottom left
+                  bounce.accel.y -= (bounce.y - bounce.size - wall.y - wall.size) * bounceBy
+                } else { // top right
+                  bounce.accel.x -= (bounce.x - bounce.size - wall.x - wall.size) * bounceBy
+                }
+              }
+            } else if (!(left || right || top || bottom)) {
+              let force = (bounce.size / point.length - 1) * bounceBy / 2
+              bounce.accel.x += point.x * force
+              bounce.accel.y += point.y * force
+            } else {
+              intersected = false
             }
-            return 0;
+          }
+
+          if (intersected) {
+            if (bounce.type === 'food') {
+              if (bounce.collisionArray.some(r => r.type === 'wall' && r.shape === 4))
+                bounce.kill()
+            } else if (bounce.type !== 'tank' && bounce.type !== 'miniboss' && bounce.type !== 'bobboss') {
+              bounce.kill()
+            }
+            bounce.collisionArray.push(wall)
+          }
         }
         function advancedcollide(my, n, doDamage, doInelastic, nIsFirmCollide = false) {
             // Prepare to check
