@@ -5042,6 +5042,7 @@ var maintainloop = (() => {
                     o.name += ran.chooseBotName();
                     o.refreshBodyAttributes();
                     o.team = -1
+                    o.color = 10
                     bots.push(o);
                 }
                 // Remove dead ones
@@ -5052,6 +5053,8 @@ var maintainloop = (() => {
                         o.skill.score += 35;
                         o.skill.maintain();
                     }
+                   if (o.upgrades)
+                     o.upgrade(Math.floor(Math.random() * o.upgrades.length))
                 });
             
         };
