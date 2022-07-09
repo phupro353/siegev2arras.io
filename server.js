@@ -4529,13 +4529,29 @@ var gameloop = (() => {
             }
             if (!instance.activation.check() && !other.activation.check()) { util.warn('Tried to collide with an inactive instance.'); return 0; }
             // Handle walls
-            if (instance.type === 'wall' || other.type === 'wall') {
+            /*if (instance.type === 'wall' || other.type === 'wall') {
                 let a = (instance.type === 'bullet' || other.type === 'bullet') ? 
                     1 + 10 / (Math.max(instance.velocity.length, other.velocity.length) + 10) : 
                     1;
                 if (instance.type === 'wall') advancedcollide(instance, other, false, false, a);
                 else advancedcollide(other, instance, false, false, a);
-            } else
+            } else*/
+          // walls
+           if (instance.type === 'wall' || other.type === 'wall') {
+                if (instance.type === 'wall' && other.type === 'wall') return
+                let wall = instance.type === 'wall' ? instance : other
+                let entity = instance.type === 'wall' ? other : instance
+                if (wall.shape === 4) {
+                  reflectcollide(wall, entity)
+                } else if (wall.shape != 4) {
+                  advancedcollide(other, instance, true, true)
+                } else {
+                  let a = entity.type === 'bullet' ?
+                      1 + 10 / (entity.velocity.length + 10) :
+                      1;
+                  advancedcollide(wall, entity, false, false, a)
+                }
+            }
              // If they can firm collide, do that
        if (
         (instance.type === "crasher" && other.type === "food") ||
