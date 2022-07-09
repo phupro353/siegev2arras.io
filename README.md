@@ -41,3 +41,8 @@ Note:
 ## Breaking Changes
 
 Breaking changes are important updates to the template that you should do on your server, as otherwise it may stop functioning. The last breaking change is on April 10th, 2019. If you've made a private server before that day, it may no longer work without this update. See `CHANGELOG.md` for details.
+
+# special things
+
+Spwn = spawn
+fspw = final spawns (for finale bosses)
