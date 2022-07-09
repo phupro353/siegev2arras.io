@@ -3402,7 +3402,7 @@ const sockets = (() => {
                             // Choose from one of the least ones
                             if (player.team == null) { player.team = ran.choose(possiblities) + 1; }
                             // Make sure you're in a base
-                            if (room['bas' + player.team].length) do { loc = room.randomType('bas' + player.team); } while (dirtyCheck(loc, 50));
+                            if (room['sanc'].length) do { loc = room.randomType('sanc'); } while (dirtyCheck(loc, 50));
                             else do { loc = room.gaussInverse(5); } while (dirtyCheck(loc, 50));
                         } break;
                         default: do { loc = room.gaussInverse(5); } while (dirtyCheck(loc, 50));
@@ -4550,7 +4550,7 @@ var gameloop = (() => {
       } else if (
         (instance.isHealBullet && other.team === instance.team) ||
         (other.isHealBullet && instance.team === other.team)
-      ) {
+      ) {//sex mark
         if (instance.master != other && other.master != instance)
           advancedcollide(instance, other, true, true);
       }
