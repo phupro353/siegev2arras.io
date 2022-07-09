@@ -17,10 +17,11 @@
   "RANDOM_COLORS": false,
   "BANNED_CHARACTER_REGEX": "/[\uFDFD\u200E\u0000]/gi", 
   "ROOM_SETUP": [
-    [ "sanc", "nest", "nest", "sanc" ],
-    [ "nest", "norm", "spwn", "nest" ],
-    [ "nest", "spwn", "norm", "nest" ],
-    [ "sanc", "nest", "nest", "sanc" ]
+    [ "nest", "nest", "nest", "nest", "nest" ],
+    [ "nest", "sanc", "spwn", "sanc", "nest" ],
+    [ "nest", "spwn", "mspw", "norm", "nest" ],
+    [ "nest", "sanc", "spwn", "sanc", "nest" ],
+    [ "nest", "nest", "nest", "nest", "nest" ]
   ],
   "X_GRID": 4,
   "Y_GRID": 4,

@@ -4553,9 +4553,6 @@ var gameloop = (() => {
       ) {
         if (instance.master != other && other.master != instance)
           advancedcollide(instance, other, true, true);
-      } if (instance.type === "bullet") {
-        instance.hitsOwnType = "never"
-        instance.type == 'bullet' ? false : instance.hitsOwnType = 'never'
       }
             else if (instance.team !== other.team) {
                 advancedcollide(instance, other, true, true);
