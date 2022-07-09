@@ -3727,7 +3727,7 @@ const sockets = (() => {
                     for (let loc of room.wall) {
                       let o = new Entity(loc)
                       o.define(Class.mazewall)
-                      o.SIZE = 211
+                      o.SIZE = 211.2
                     }
                     var sec_left = 60; //How long before team loses
   var stopTime = 0;
