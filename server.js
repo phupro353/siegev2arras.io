@@ -2513,7 +2513,7 @@ class Entity {
                     usurptText = usurptText.slice(0, -4);
                     usurptText += '!';
                 } else {
-                    usurptText += ' fought a polygon... and the polygon won.';
+                    usurptText += ' fought a polygon... and the polygon won. Tip: DONT FIGHT POLYGONS';
                 }
                 sockets.broadcast(usurptText);
             }
@@ -3727,7 +3727,7 @@ const sockets = (() => {
                     for (let loc of room.wall) {
                       let o = new Entity(loc)
                       o.define(Class.mazewall)
-                      o.SIZE = 211.2
+                      o.SIZE = 211
                     }
                     var sec_left = 60; //How long before team loses
   var stopTime = 0;
