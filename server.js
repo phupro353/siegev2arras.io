@@ -4960,7 +4960,7 @@ var maintainloop = (() => {
                         sockets.broadcast('Elite Crasher Series X')
                         break;
                     case 7: 
-                        choice = [[Class.elite_battleship], 3, 'a', 'spwn'];
+                        choice = [[Class.elite_battleship, Class.elite_streamliner], 3, 'a', 'spwn'];
                         break;
                     case 8: 
                         choice = [[Class.elite_skimmer, Class.palisade, Class.nestkeeper, Class.unknownboss], 2, 'a', 'spwn'];
