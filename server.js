@@ -4904,13 +4904,13 @@ var maintainloop = (() => {
                         sockets.broadcast("Real Trouble comes now... The Celestials rise and Attack the earth. and one got to the siege and will start to dominate!")
                         break;
                     case 11: 
-                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer], 3, 'a', 'spwn'];
+                        choice = [[Class.pluto], 1, 'a', 'spwn'];
                         break;
                     case 12: 
-                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 4, 'a', 'spwn'];
+                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer], 3, 'a', 'spwn'];
                         break;
                     case 13: 
-                        choice = [[Class.pluto], 1, 'a', 'spwn'];
+                        choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 4, 'a', 'spwn'];
                         break;
                     case 14: 
                         choice = [[Class.plasma, Class.pluto, Class.palisade, Class.elite_batleship, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner], 5, 'a', 'spwn'];
