@@ -4984,7 +4984,7 @@ var maintainloop = (() => {
                     case 14: 
                         choice = [[Class.plasma, Class.pluto, Class.palisade, Class.elite_batleship, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner], 5, 'a', 'spwn'];
                         break;
-                    case 13:
+                    case 15:
                         setTimeout(() => {
                           process.exit()
                         }, 10000) 
