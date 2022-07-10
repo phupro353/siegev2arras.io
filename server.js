@@ -4913,7 +4913,7 @@ var maintainloop = (() => {
                         choice = [[Class.plasma, Class.palisade, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 4, 'a', 'spwn'];
                         break;
                     case 14: 
-                        choice = [[Class.plasma, Class.pluto, Class.palisade, Class.elite_batleship, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner], 5, 'a', 'spwn'];
+                        choice = [[Class.plasma, Class.pluto, Class.palisade, Class.elite_batleship, Class.unknownboss, Class.penta_destroyer, Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.elite_skimmer, Class.nestkeeper, Class.elite_streamliner, Class.elite_minigun], 5, 'a', 'fspw'];
                         break;
                     case 15:
                         setTimeout(() => {
