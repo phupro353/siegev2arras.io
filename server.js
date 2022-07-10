@@ -4941,7 +4941,7 @@ var maintainloop = (() => {
         let choice = [];
         switch (wave) {
                     case 1: 
-                        choice = [[Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 2, 'a', 'spwn'];
+                        choice = [[Class.elite_destroyer, Class.elite_sprayer, Class.elite_gunner, Class.penta_destroyer], 2, 'a', 'fspw'];
                         break;
                     case 2: 
                         choice = [[Class.palisade, Class.unknownboss, Class.penta_destroyer], 1, 'castle', 'spwn'];
@@ -4969,7 +4969,7 @@ var maintainloop = (() => {
                         choice = [[Class.elite_skimmer, Class.palisade, Class.nestkeeper, Class.unknownboss], 3, 'a', 'spwn'];
                         break;
                     case 10: 
-                        choice = [[Class.plasma], 1, 'a', 'spwn'];
+                        choice = [[Class.plasma], 1, 'a', 'fspw'];
                         sockets.broadcast("Real Trouble comes now... The Celestials rise and Attack the earth. and one got to the siege and will start to dominate!")
                         break;
                     case 11: 
