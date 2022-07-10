@@ -3729,76 +3729,7 @@ const sockets = (() => {
                       o.define(Class.mazewall)
                       o.SIZE = 211
                     }
-                    var sec_left = 60; //How long before team loses
-  var stopTime = 0;
-  var reset = true;
-
-function timeThing() {
-  var timer = setInterval(function(){
-  if (stopTime === 1){
-    clearInterval(timer);
-    stopTime = 0;
-  }
-  if(sec_left <= 0){
-    clearInterval(timer);
-    sockets.broadcast('Your Team has Lost')
-    process.exit()
-    reset = false;
-  } else {
-    if (sec_left === 50){
-      sockets.broadcast('your team will lose in 50 seconds')
-    }
-    if (sec_left === 40){
-      sockets.broadcast('your team will lose in 40 seconds')
-    }
-    if (sec_left === 30){
-      sockets.broadcast('your team will lose in 30 seconds')
-    }
-    if (sec_left === 20){
-      sockets.broadcast('your team will lose in 20 seconds')
-    }
-    if (sec_left === 10){
-      sockets.broadcast('your team will lose in 10 seconds')
-    }
-    if (sec_left === 9){
-      sockets.broadcast('your team will lose in 9 seconds')
-    }
-    if (sec_left === 8){
-      sockets.broadcast('your team will lose in 8 seconds')
-    }
-    if (sec_left === 7){
-      sockets.broadcast('your team will lose in 7 seconds')
-    }
-    if (sec_left === 6){
-      sockets.broadcast('your team will lose in 6 seconds')
-    }
-    if (sec_left === 5){
-      sockets.broadcast('your team will lose in 5 seconds')
-    }
-    if (sec_left === 4){
-      sockets.broadcast('your team will lose in 4 seconds')
-    }
-    if (sec_left === 3){
-      sockets.broadcast('your team will lose in 3 seconds')
-    }
-    if (sec_left === 2){
-      sockets.broadcast('your team will lose in 2 seconds')
-    }
-    if (sec_left === 1){
-      sockets.broadcast('your team will lose in 1 seconds')
-    }
-  }
-  sec_left -= 1;
-}, 1000);
-}
-
-function stopTimer (){
-  stopTime = 1;
-  if (reset === true){
-  sec_left = 60;
-  }
-}
-                  let sanc_count = 4
+                  var sanc_count = 4
                   if (room.sanc)
                     for (let loc of room.sanc) {
                       let o = new Entity(loc)
@@ -3813,7 +3744,7 @@ function stopTimer (){
                         e.color = 13
                         e.SIZE = 50
                         sanc_count -= 1
-                        sockets.broadcasy("Sanctuary died! " + sanc_count + " Remain")
+                        sockets.broadcast("Sanctuary died! " + sanc_count + " Remain")
                         e.ondeath = () => {
                            let d = new Entity(loc)
                            d.define(Class.sanctuary)
@@ -3821,7 +3752,7 @@ function stopTimer (){
                            d.color = 10
                            d.SIZE = 50
                            sanc_count += 1
-                           sockets.broadcasy("Sanctuary died! " + sanc_count + " Remain")
+                           sockets.broadcast("Sanctuary died! " + sanc_count + " Remain")
                            d.ondeath = o.ondeath
                            o = d
                         }
@@ -4960,7 +4891,7 @@ var maintainloop = (() => {
                         sockets.broadcast('Elite Crasher Series X')
                         break;
                     case 7: 
-                        choice = [[Class.elite_battleship, Class.elite_streamliner], 3, 'a', 'spwn'];
+                        choice = [[Class.elite_battleship, Class.elite_streamliner], 2, 'a', 'spwn'];
                         break;
                     case 8: 
                         choice = [[Class.elite_skimmer, Class.palisade, Class.nestkeeper, Class.unknownboss], 2, 'a', 'spwn'];
